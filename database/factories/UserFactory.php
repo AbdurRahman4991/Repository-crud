@@ -29,7 +29,7 @@ class UserFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
-        ];
+        ]; 
     }
 
     /**

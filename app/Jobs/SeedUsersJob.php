@@ -34,4 +34,4 @@ class SeedUsersJob implements ShouldQueue
         \Log::info("Successfully seeded $this->batchSize users.");
     }
     
-}
+} 

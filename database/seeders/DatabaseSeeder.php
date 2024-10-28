@@ -18,8 +18,9 @@ class DatabaseSeeder extends Seeder
 
         for ($i = 0; $i < $jobs; $i++) {
             \Log::info("Dispatching SeedUsersJob for batch " . ($i + 1));
-            SeedUsersJob::dispatch(100)->onQueue('seeding');
+            SeedUsersJob::dispatch($batchSize);
 
         }
     }
 }
+ 
