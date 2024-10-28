@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Jobs\SeedUsersJob;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +12,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $batchSize = 1000; // Number of records per batch
+        $totalRecords = 1000000; // 1 million records
+        $jobs = $totalRecords / $batchSize;
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        for ($i = 0; $i < $jobs; $i++) {
+            \Log::info("Dispatching SeedUsersJob for batch " . ($i + 1));
+            SeedUsersJob::dispatch(100)->onQueue('seeding');
+
+        }
     }
 }
