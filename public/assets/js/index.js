@@ -118,6 +118,66 @@ $(document).ready(function() {
 
     // Update user //
 
+    $(document).ready(function() {
+        // Other existing code...
     
+        // Handle the edit button click
+        $('#example').on('click', '.fa-pen-to-square', function() {
+            // Get user data from the clicked row
+            var rowData = table.row($(this).parents('tr')).data();
+    
+            // Populate the modal fields
+            $('#userId').val(rowData.id); // Assuming 'id' is part of your user data
+            $('#updateName').val(rowData.name);
+            $('#updateEmail').val(rowData.email);
+            $('#updatePhone').val(rowData.phone);
+            
+            // Show the modal
+            $('#updateUser').modal('show');
+        });
+    
+        // Handle the update form submission
+        $('#saveUpdate').on('click', function() {
+            // Get the data from the form
+            var formData = $('#updateUserForm').serialize();
+    
+            $.ajax({
+                url: "/users/" + $('#userId').val(), // Adjust the URL according to your update route
+                type: 'PUT', // Use PUT for update
+                data: formData,
+                success: function(response) {
+                    // Handle success
+                    $('#updateUser').modal('hide'); // Hide the modal
+                    table.ajax.reload(null, false); // Reload the DataTable without resetting paging
+    
+                    // Optionally, show a success message
+                    $('#responseMessage')
+                        .removeClass('alert-danger')
+                        .addClass('alert-success')
+                        .text(response.message)
+                        .show();
+                },
+                error: function(xhr) {
+                    // Handle validation errors
+                    $('#responseMessage')
+                        .removeClass('alert-success')
+                        .addClass('alert-danger')
+                        .html(''); // Clear previous messages
+                    $('#responseMessage').text(xhr.responseJSON.message).show();
+    
+                    if (xhr.responseJSON.errors) {
+                        let errors = xhr.responseJSON.errors;
+                        for (let field in errors) {
+                            let errorMsg = errors[field].join(', ');
+                            $('#responseMessage').append('<div>' + errorMsg + '</div>');
+                        }
+                    }
+                }
+            });
+        });
+    });
+    
+
+
     
 });

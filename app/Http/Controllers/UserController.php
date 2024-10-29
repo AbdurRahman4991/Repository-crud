@@ -45,7 +45,7 @@ class UserController extends Controller
         // Use validated data from the request
         $this->user->store($request->validated()); // Now validated data is used
     
-        return response()->json(['message' => 'Thank you for inserting data']);
+        return response()->json(['message' => 'Thank you for insert user']);
     }
     
 
@@ -55,11 +55,6 @@ class UserController extends Controller
     public function show(string $id)
     {
         $users = $this->user->show($id);
-        // $user = User::find($id);
-        // if(!$user){
-        //     return abort('404');
-        // }
-        // return $user;
         return response()->json($users);
     }
 
@@ -76,18 +71,19 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $user = User::find($id);
+        // $user = User::find($id);
     
-        if (!$user) {
-            return abort(404);
-        }
+        // if (!$user) {
+        //     return abort(404);
+        // }
     
-        // Merge existing user data with the request data, keeping existing values if request is null
-        $data = array_merge($user->toArray(), $request->all());
+        // // Merge existing user data with the request data, keeping existing values if request is null
+        // $data = array_merge($user->toArray(), $request->all());
     
-        $user->update($data);
+        // $user->update($data);
+        $this->user->update($request->all(), $id); 
     
-        return back();
+        return response()->json(['message' => 'Thank you for updating user']);
     }
     
 
