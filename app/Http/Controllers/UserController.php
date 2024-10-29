@@ -4,16 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-
+use App\Contracts\UserInterface;
 class UserController extends Controller
 {
+    public $user;
+    public function __construct(UserInterface $interface) {
+        $this->user = $interface;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $user = User::paginate(10);
-        return $user;
+        $users = $this->user->all(); // Call the repository method
+
+        return response()->json([
+            'data' => $users->items(), // Get the actual items
+            'recordsTotal' => $users->total(), // Total records in the database
+            'recordsFiltered' => $users->total(), // Total records after filtering
+        ]);
     }
 
     /**
@@ -29,8 +38,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        User::create($request->all());
-        return back();
+        $this->user->store($request->all());
+        // User::create($request->all());
+        return 'thank you for insert data';
     }
 
     /**

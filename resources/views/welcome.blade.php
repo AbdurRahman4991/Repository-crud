@@ -15,8 +15,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/fontawesome.min.css" integrity="sha512-B46MVOJpI6RBsdcU307elYeStF2JKT87SsHZfRSkjVi4/iZ3912zXi45X5/CBr/GbCyLx6M1GQtTKYRd52Jxgw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/solid.min.css" integrity="sha512-/r+0SvLvMMSIf41xiuy19aNkXxI+3zb/BN8K9lnDDWI09VM0dwgTMzK7Qi5vv5macJ3VH4XZXr60ip7v13QnmQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        
-
         <!-- Data table css -->
         <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
     </head>
@@ -27,54 +25,30 @@
                     <div lass="card">
                         <div class="card-body">
                             <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >+ Add new</button>
-                        <table id="example" class="display" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>nexson@gmail.com</td>
-                                    <td>01317659523</td>
-                                    <td>Active</td>
-                                    <td>
-                                    <i id="action" class="fa-solid fa-pen-to-square"></i>
-                                    <i id="action" class="fa-solid fa-delete-left text-danger"></i>
-                                    </td>
-                                    
-                                </tr>
-                                
-                                <tr>
-                                    <td>Donna Snider</td>
-                                    <td>Customer@gmail.com</td>
-                                    <td>0165456456</td>
-                                    <td>Active</td>
-                                    <td>
-                                    <i data-bs-toggle="modal" data-bs-target="#updateUser" class="fa-solid fa-pen-to-square"></i>
-                                    <i data-bs-toggle="modal" data-bs-target="#deleteUser" class="fa-solid fa-delete-left text-danger"></i>
+                            <table id="example" class="display" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Data will be loaded here dynamically -->
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
 
-                                    </td>
-                                   
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                            <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                    
-                                </tr>
-                            </tfoot>
-                        </table>
                         </div>
                     </div>
                 </div>
@@ -90,7 +64,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="">
+                    <form action="{{url('users')}}" method="post">
+                        @csrf()
                         <div class="input-groupe">
                             <label for="">Name</label>
                             <input type="text" name="name" class="form-control" placeholder="type your name">
@@ -101,8 +76,9 @@
                         </div>
                         <div class="input-groupe">
                             <label for="">Phone</label>
-                            <input type="text" name="name" class="form-control" placeholder="type your name">
+                            <input type="text" name="phone" class="form-control" placeholder="type your name">
                         </div>
+                        <button type='submit' class='btn btn-success'>submit</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -169,8 +145,9 @@
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-        <script>            	
+        <script src="{{asset('../assets/js/index.js')}}"></script>
+        <!-- <script>            	
             new DataTable('#example');
-        </script>
+        </script> -->
     </body>
 </html>
