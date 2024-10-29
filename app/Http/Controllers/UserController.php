@@ -82,11 +82,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        // $user = User::find($id);
-        // if(!$user){
-        //     return abort('404');
-        // }
-        //  $user->delete();
         $this->user->delete($id);
         return response()->json(['message' => 'Delete user success']);
     }

@@ -4,6 +4,8 @@ namespace App\Contracts;
 
 interface UserInterface{
 
+    /** User crud method */
+
     public function all();
     public function store(array $data);
     public function show(string $id);
