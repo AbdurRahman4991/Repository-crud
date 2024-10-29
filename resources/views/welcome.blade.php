@@ -3,6 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
         <title>Laravel</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -17,6 +19,7 @@
 
         <!-- Data table css -->
         <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
+        
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
         <div class="container mt-5">
@@ -125,26 +128,27 @@
             </div>
         </div>
 
-
-        <!-- Delete Model -->
-
-        <div class="modal fade" id="deleteUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <!-- Delete Modal -->
+        <div class="modal fade" id="deleteUser" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteUserLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Remove user</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <h6>Dou you want to delete</h6>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                    <button type="button" class="btn btn-primary">Yes</button>
-                </div>
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="deleteUserLabel">Remove user</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Do you want to delete this user?</h6>
+                        <form action=""></form>
+                        <input type="hidden" id="deleteUserId"> <!-- Hidden input for the user ID -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <button type="button" id="confirmDelete" class="btn btn-danger">Yes</button>
+                    </div>
                 </div>
             </div>
         </div>
+
 
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>

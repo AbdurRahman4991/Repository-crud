@@ -176,6 +176,58 @@ $(document).ready(function() {
             });
         });
     });
+
+    // Delete User //
+
+    $(document).ready(function() {
+        // Other existing code...
+    
+        // Handle the delete button click
+        $('#example').on('click', '.fa-delete-left', function() {
+            // Get user data from the clicked row
+            var rowData = table.row($(this).parents('tr')).data();
+            
+            // Set the user ID to the hidden input in the modal
+            $('#deleteUserId').val(rowData.id); 
+            
+            // Show the delete confirmation modal
+            $('#deleteUser').modal('show');
+        });
+    
+        // Handle the confirmation of deletion
+        $('#confirmDelete').on('click', function() {
+            var userId = $('#deleteUserId').val(); // Get the user ID from the hidden input
+    
+            $.ajax({
+                url: "/users/" + userId, // Adjust the URL according to your delete route
+                type: 'DELETE', // Use DELETE for the delete request
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content') // Manually add token
+                },
+                success: function(response) {
+                    // Handle success
+                    $('#deleteUser').modal('hide'); // Hide the modal
+                    table.ajax.reload(null, false); // Reload the DataTable without resetting paging
+    
+                    // Optionally, show a success message
+                    $('#responseMessage')
+                        .removeClass('alert-danger')
+                        .addClass('alert-success')
+                        .text(response.message)
+                        .show();
+                },
+                error: function(xhr) {
+                    // Handle error, e.g., show an error message
+                    $('#responseMessage')
+                        .removeClass('alert-success')
+                        .addClass('alert-danger')
+                        .text('An error occurred while trying to delete the user.')
+                        .show();
+                }
+            });
+        });
+    });
+    
     
 
 

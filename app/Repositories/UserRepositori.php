@@ -71,4 +71,15 @@ class UserRepositori implements UserInterface{
         ]);
         return $user;
     }
+
+    // Delete user // 
+
+    public function delete($id)
+    {
+        $user = User::find($id);
+        if(!$user){
+            return abort('404');
+        }
+         $user->delete();
+    }
 }

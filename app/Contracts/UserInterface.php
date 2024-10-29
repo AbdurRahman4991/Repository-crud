@@ -8,6 +8,7 @@ interface UserInterface{
     public function store(array $data);
     public function show(string $id);
     public function update(array $data, int $id);
+    public function delete($id);
 }
 
 

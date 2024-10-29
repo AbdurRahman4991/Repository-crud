@@ -71,16 +71,6 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // $user = User::find($id);
-    
-        // if (!$user) {
-        //     return abort(404);
-        // }
-    
-        // // Merge existing user data with the request data, keeping existing values if request is null
-        // $data = array_merge($user->toArray(), $request->all());
-    
-        // $user->update($data);
         $this->user->update($request->all(), $id); 
     
         return response()->json(['message' => 'Thank you for updating user']);
@@ -90,13 +80,14 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $user = User::find($id);
-        if(!$user){
-            return abort('404');
-        }
-         $user->delete();
-         return back();
+        // $user = User::find($id);
+        // if(!$user){
+        //     return abort('404');
+        // }
+        //  $user->delete();
+        $this->user->delete($id);
+        return response()->json(['message' => 'Delete user success']);
     }
 }
