@@ -42,21 +42,25 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $this->user->store($request->all());
-        // User::create($request->all());
-        return 'thank you for insert data';
+        // Use validated data from the request
+        $this->user->store($request->validated()); // Now validated data is used
+    
+        return response()->json(['message' => 'Thank you for inserting data']);
     }
+    
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        $user = User::find($id);
-        if(!$user){
-            return abort('404');
-        }
-        return $user;
+        $users = $this->user->show($id);
+        // $user = User::find($id);
+        // if(!$user){
+        //     return abort('404');
+        // }
+        // return $user;
+        return response()->json($users);
     }
 
     /**

@@ -35,7 +35,6 @@ class UserRepositori implements UserInterface{
     ];
 }
 
-
     public function store(array $data)
     {
         return User::create([
@@ -43,5 +42,14 @@ class UserRepositori implements UserInterface{
             'email'=>$data['email'],
             'phone'=>$data['phone'],
         ]);
+    }
+
+    public function show(string $id)
+    {
+        $user = User::find($id);
+        if(!$user){
+            return abort('404');
+        }
+        return $user;
     }
 }
