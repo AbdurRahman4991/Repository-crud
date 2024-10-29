@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Contracts\UserInterface;
+use App\Http\Requests\UserRequest;
+
 class UserController extends Controller
 {
     public $user;
@@ -14,16 +16,18 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $users = $this->user->all(); // Call the repository method
 
-        return response()->json([
-            'data' => $users->items(), // Get the actual items
-            'recordsTotal' => $users->total(), // Total records in the database
-            'recordsFiltered' => $users->total(), // Total records after filtering
-        ]);
-    }
+    public function index(Request $request)
+{
+    $search = $request->get('search')['value']; // Get the search input
+    $start = $request->get('start', 0); // Get the start index for pagination
+    $length = $request->get('length', 10); // Get the number of records per page
+
+    $users = $this->user->all($search, $start, $length); // Pass parameters to repository
+
+    return response()->json($users); // Return the entire response
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -36,7 +40,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
         $this->user->store($request->all());
         // User::create($request->all());

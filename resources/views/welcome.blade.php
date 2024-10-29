@@ -66,24 +66,24 @@
                 <div class="modal-body">
                     <form action="{{url('users')}}" method="post">
                         @csrf()
-                        <div class="input-groupe">
+                        <div class="input-groupe mb-2">
                             <label for="">Name</label>
                             <input type="text" name="name" class="form-control" placeholder="type your name">
                         </div>
-                        <div class="input-groupe">
+                        <div class="input-groupe mb-2">
                             <label for="">Email</label>
                             <input type="email" name="email" class="form-control" placeholder="type your email">
                         </div>
-                        <div class="input-groupe">
+                        <div class="input-groupe mb-2">
                             <label for="">Phone</label>
                             <input type="text" name="phone" class="form-control" placeholder="type your name">
                         </div>
-                        <button type='submit' class='btn btn-success'>submit</button>
+                        
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save</button>
+                        </div>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
                 </div>
                 </div>
             </div>

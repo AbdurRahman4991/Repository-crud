@@ -2,7 +2,10 @@ $(document).ready(function() {
     $('#example').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "/users", // Ensure this is the correct URL
+        ajax: {
+            url: "/users", // Ensure this is the correct URL for your route
+            type: 'GET', // Use the correct request type
+        },
         columns: [
             { data: 'name', name: 'name' },
             { data: 'email', name: 'email' },
