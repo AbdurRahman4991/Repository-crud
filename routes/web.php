@@ -11,4 +11,4 @@ Route::get('/', function () {
 
 /** User crud resource route */
 
-Route::resource('users',UserController::class);
+Route::resource('users',UserController::class)->except(['create', 'edit']);
